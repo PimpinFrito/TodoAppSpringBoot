@@ -1,0 +1,75 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update Task</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="taskForm">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          id="title"
+          formControlName="title"
+          class="form-control"
+          required
+        />
+        <div
+          *ngIf="
+            taskForm.get('title')?.invalid && taskForm.get('title')?.touched
+          "
+          class="text-danger"
+        >
+          Title is required
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input
+          id="description"
+          formControlName="description"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="dueDate" class="form-label">Due Date</label>
+        <input
+          id="dueDate"
+          type="date"
+          formControlName="dueDate"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="completed" class="form-check-label">Completed</label>
+        <input
+          id="completed"
+          type="checkbox"
+          formControlName="completed"
+          class="form-check-input"
+        />
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="saveTask()"
+      [disabled]="taskForm.invalid"
+    >
+      Save
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      (click)="modal.close()"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>

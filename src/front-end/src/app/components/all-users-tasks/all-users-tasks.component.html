@@ -1,0 +1,43 @@
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Description</th>
+        <th>Due Date</th>
+        <th>Completed</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.dueDate | date }}</td>
+        <td>{{ task.completed }}</td>
+        <td>
+          <button
+            class="btn btn-primary action-btn"
+            (click)="taskModal.openModalEditTask(task)"
+          >
+            Update Task
+          </button>
+          <button
+            class="btn btn-danger action-btn"
+            (click)="deleteTaskModal.openModalDeleteTask(task)"
+          >
+            Delete Task
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-primary" (click)="taskModal.openModalCreateTask()">
+    Add Task
+  </button>
+  <app-task-modal #taskModal (save)="handleSave($event)"></app-task-modal>
+  <app-delete-task-modal
+    #deleteTaskModal
+    (delete)="handleDelete($event)"
+  ></app-delete-task-modal>
+</div>
